@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+    <title>Web form</title>
+    <script>
+        function showTextOnSubmit() {
+            document.getElementById("demo").innerHTML = "Thank you. Submitted!";
+        }
+    </script>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Creates two equal-width columns */
+            /* You can also use fixed widths or percentages: */
+            /* grid-template-columns: 200px auto; */
+            /* grid-template-columns: 30% 70%; */
+        }
+
+        .column {
+            padding: 20px;
+            border: 1px solid #ccc; /* Optional: for visual separation */
+            border-radius: 7px;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .area {
+            padding: 20px;
+            border: 1px solid darkblue; /* Optional: for visual separation */
+            border-radius: 7px;
+        }
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 300px;
+            padding: 5px;
+            font-size: 12px;
+            margin-bottom: 10px; /* Add some spacing between fields */
+            border: 1px solid #ccc;
+        }
+        button.large-button {
+            padding: 5px 5px;
+            font-size: 14px;
+            border-radius: 7px; /* Optional: Rounded corners */
+            background-color: #007bff; /* Optional: Background color */
+            color: white; /* Optional: Text color */
+            cursor: pointer; /* Optional: Indicate it's clickable */
+            transition: background-color 0.3s ease; /* Optional: Smooth hover effect */
+            margin-bottom: 10px;
+        }
+
+        .large-button:hover {
+            background-color: navy; /* Optional: Darker on hover */
+        }
+        select {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .datalist {
+            width:300px;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>HTML Elements</h2>
+<div class="container">
+    <div class="column">
+        <h2 id="demo">Submit a form:</h2>
+        <div class="area">
+            <label>Name<br><br>
+                <input  type="text" name="my-text" id="my-text-id"><br>
+            </label>
+
+            <label>Password<br><br>
+
+                <input type="password" class="form-control" name="my-password" autocomplete="off"><br>
+            </label>
+
+            <button type="submit" class="large-button" onclick="showTextOnSubmit()">Submit</button>
+        </div>
+
+    </div>
+    <div class="column">
+        <h2>Two types of drop-down lists:</h2>
+        <div class="area">
+        <div>
+            <label>Dropdown (select)<p></p>
+                <select  name="my-select">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </label>
+            <p></p>
+            <label>Dropdown (datalist)<p></p>
+                <input class="datalist" list="my-options" name="my-datalist" placeholder="Type to search...">
+                <datalist id="my-options">
+                    <option value="San Francisco">
+                    <option value="New York">
+                    <option value="Seattle">
+                    <option value="Los Angeles">
+                    <option value="Chicago">
+                </datalist>
+            </label>
+        </div>
+        </div>
+    </div>
+
+</div>
+<div class="container">
+    <div class="column">
+        <h2>Checkboxes and radio buttons:</h2>
+    </div>
+    <div class="column">
+        <h2>Miscellaneous elements: </h2>
+    </div>
+
+</div>
+</body>
+</html>
