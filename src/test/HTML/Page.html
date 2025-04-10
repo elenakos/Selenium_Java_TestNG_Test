@@ -3,7 +3,9 @@
     <title>Web form</title>
     <script>
         function showTextOnSubmit() {
-            document.getElementById("demo").innerHTML = "Thank you. Submitted!";
+            document.getElementById("demo").innerHTML = "Submitted!";
+            document.getElementById("my-id").value = "";
+            document.getElementById("my-password").value = "";
         }
     </script>
     <style>
@@ -28,6 +30,7 @@
             padding: 20px;
             border: 1px solid darkblue; /* Optional: for visual separation */
             border-radius: 7px;
+            margin-bottom: 5px;
         }
         input[type="text"],
         input[type="password"],
@@ -74,6 +77,33 @@
             cursor: pointer;
             margin-bottom: 10px;
         }
+        input[type="checkbox"] {
+            margin-left: 10px; /* Space before */
+            margin-right: 20px; /* Space after */
+            margin-top: 5px;    /* Space above */
+            margin-bottom: 5px; /* Space below */
+        }
+        input[type="radio"] {
+            margin-left: 10px; /* Space before */
+            margin-right: 20px; /* Space after */
+            margin-top: 5px;    /* Space above */
+            margin-bottom: 5px; /* Space below */
+        }
+        input[type="date"] {
+            width:200px;
+            color-scheme: light dark; /* Or just 'dark' or 'light' */
+            margin-left: 10px; /* Space before */
+            margin-right: 20px; /* Space after */
+            margin-top: 5px;    /* Space above */
+            margin-bottom: 5px; /* Space below */
+            border: 1px solid #ccc;
+        }
+        input[type="file"] {
+            /* Style the overall input if needed */
+            padding: 5px; /* Adjust vertical padding */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
@@ -87,16 +117,15 @@
     <div class="column">
         <h2 id="demo">Submit a form:</h2>
         <div class="area">
-            <label>Name<br><br>
-                <input  type="text" name="my-text" id="my-text-id"><br>
+            <label>Name:<br><br>
+                <input  type="text" name="my-text" id="my-id"><br>
             </label>
 
-            <label>Password<br><br>
-
-                <input type="password" class="form-control" name="my-password" autocomplete="off"><br>
+            <label>Password:<br><br>
+                <input type="password" class="form-control" name="my-password" id="my-password" autocomplete="off"><br>
             </label>
 
-            <button type="submit" class="large-button" onclick="showTextOnSubmit()">Submit</button>
+            <button type="submit" class="large-button" onclick="showTextOnSubmit()" id="submit">Submit</button>
         </div>
 
     </div>
@@ -131,9 +160,46 @@
 <div class="container">
     <div class="column">
         <h2>Checkboxes and radio buttons:</h2>
+        <div class="area">
+        <label>Checkboxes:</label><br>
+        <div>
+            <label >
+                <input  type="checkbox" name="my-check" id="my-check-1" checked>Checked checkbox<br>
+            </label>
+
+            <label >
+                <input type="checkbox" name="my-check" id="my-check-2">Default checkbox<br>
+            </label>
+        </div>
+        </div>
+
+        <div class="area">
+        <div >
+            <label>Radio buttons:</label><br>
+            <label>
+                <input  type="radio" name="my-radio" id="my-radio-1" checked>Checked radio<br>
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="my-radio" id="my-radio-2">Default radio<br>
+            </label>
+        </div>
+        </div>
     </div>
     <div class="column">
         <h2>Miscellaneous elements: </h2>
+        <div class="area">
+        <label >Date picker
+            <label for="dateInput"></label>
+            <input type="date" id="dateInput" name="dateInput">
+        </label>
+        </div>
+        <div class="area">
+        <label>File input
+            <input type="file" name="my-file">
+        </label>
+        </div>
     </div>
 
 </div>

@@ -20,14 +20,6 @@ public class OpenLocalHtmlTest {
         // System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-
-    @Test
-    public void openLocalHtmlFile() {
         String relativePath = "src/test/HTML/Page.html";
         File file = new File(projectPath, relativePath);
         String absolutePath = file.getAbsolutePath();
@@ -35,11 +27,29 @@ public class OpenLocalHtmlTest {
 
         // Navigate to the local HTML file
         driver.get(fileUrl);
+    }
 
+    @Test
+    public void verifyPageTitle() {
         String pageTitle = driver.getTitle();
         System.out.println("Page Title: " + pageTitle);
         String expectedTitle = "Web form";
         Assert.assertEquals(pageTitle, expectedTitle);
+    }
+
+    @Test
+    public void verifyFormSubmit() {
+        WebElement formText = driver.findElement(By.id("demo"));
+        WebElement idField = driver.findElement(By.id("my-id"));
+        WebElement passwordField = driver.findElement(By.id("my-password"));
+        WebElement submitButton = driver.findElement(By.id("submit"));
+        idField.sendKeys("Hello");
+        passwordField.sendKeys("Hi");
+        submitButton.click();
+        String actualText = formText.getText();
+        System.out.println("Text: " + actualText);
+        String expectedText ="Submitted!";
+        Assert.assertEquals(actualText, expectedText);
     }
 
     @AfterTest
