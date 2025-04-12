@@ -10,7 +10,12 @@ This example is using a local HTML document with various elements and styled wit
 5. Start creating your test classes and Page Object Model (POM) classes
 
 ### About TestNG Annotations
-
+TestNG is a popular Java testing framework that makes it easier to write, organize, and run automated tests.
+TestNG annotations are special markers in Java code that control how your tests and suites are executed:
+- `@Test` marks a method as a test
+- `@BeforeSuite` and `@AfterSuite` annotate methods that will be executed once at the beginning and the end of a test suite
+- `@BeforeTest` and `@AfterTest` mark methods that will be executed before and after running all tests within a class
+More examples and explanations can be found [here](https://testng.org/annotations.html)
 
 
 ### How to work with different UI elements
