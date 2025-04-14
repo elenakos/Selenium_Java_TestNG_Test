@@ -1,9 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
 import java.io.File;
 
 public class OpenLocalHtmlTest {
@@ -26,6 +25,15 @@ public class OpenLocalHtmlTest {
         // Navigate to the local HTML file
         driver.get(fileUrl);
     }
+    @BeforeMethod
+    public void startTest() {
+        System.out.println("**** Test case - start");
+    }
+
+    @AfterMethod
+    public void endTest() {
+        System.out.println("**** Test case - end");
+    }
 
     @Test
     public void verifyPageTitle() {
@@ -43,6 +51,17 @@ public class OpenLocalHtmlTest {
         System.out.println("Text: " + actualText);
         String expectedText ="Submitted!";
         Assert.assertEquals(actualText, expectedText);
+    }
+
+    @Test
+    public void verifyCheckboxIsChecked() {
+        Assert.assertTrue(pagePOM.isCheckboxChecked(pagePOM.checkbox1));
+    }
+
+    @Test
+    public void verifyCheckboxCanBeChecked() {
+        pagePOM.clickOnCheckbox(pagePOM.checkbox2);
+        Assert.assertTrue(pagePOM.isCheckboxChecked(pagePOM.checkbox2));
     }
 
     @AfterTest
