@@ -1,5 +1,7 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class PagePOM {
     private WebDriver driver;
@@ -12,6 +14,9 @@ public class PagePOM {
     public By submitButton = By.id("submit");
     public By checkbox1 = By.id("my-check-1");
     public By checkbox2 = By.id("my-check-2");
+    public By radioButton1 = By.id("my-radio-1");
+    public By radioButton2 = By.id("my-radio-2");
+    public By dropDownList = By.name("my-select");
 
     public PagePOM(WebDriver driver) {
         this.driver = driver;
@@ -27,24 +32,37 @@ public class PagePOM {
         driver.findElement(submitButton).click();
     }
 
-    public String verifyFormSubmit() {
+    public String verifyFormSubmitStatus() {
         String actualText = driver.findElement(formText).getText();
         System.out.println("Text: " + actualText);
         return actualText;
     }
 
-    public Boolean isCheckboxChecked(By element) {
-        if (driver.findElement(element).isSelected()) {
+    public Boolean isCheckboxRadiobuttonChecked(By element) {
+        if (driver.findElement(element).isDisplayed()) {
+            driver.findElement(element).isSelected();
             return true;
         } else {
             return false;
         }
     }
 
-    public void clickOnCheckbox(By element) {
+    public void clickOnCheckboxRadioButton(By element) {
         if (driver.findElement(element).isDisplayed()) {
             driver.findElement(element).click();
         }
     }
 
+    public void selectOptionFromDropDownList(By element, String option) {
+        Select dropdown = new Select(driver.findElement(element));
+        if (driver.findElement(element).isDisplayed()) {
+            dropdown.selectByVisibleText(option);
+        }
+    }
+
+    public String verifySelectedOptionInDropdownList(By element) {
+        Select dropdown = new Select(driver.findElement(element));
+        WebElement selectedOption = dropdown.getFirstSelectedOption();
+        return selectedOption.getText();
+    }
 }

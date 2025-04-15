@@ -2,7 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-
+import java.lang.reflect.Method;
 import java.io.File;
 
 public class OpenLocalHtmlTest {
@@ -25,9 +25,16 @@ public class OpenLocalHtmlTest {
         // Navigate to the local HTML file
         driver.get(fileUrl);
     }
+
+    @AfterTest
+    public void tearDown() {
+        System.out.println("*** Test suite - end");
+        driver.quit();
+    }
+
     @BeforeMethod
-    public void startTest() {
-        System.out.println("**** Test case - start");
+    public void startTest(Method method) {
+        System.out.println("**** Test case - start of: " + method.getName() + "()");
     }
 
     @AfterMethod
@@ -44,10 +51,10 @@ public class OpenLocalHtmlTest {
     }
 
     @Test
-    public void verifyFormSubmit() {
+    public void verifyFormCanBeSubmitted() {
         pagePOM.fillForm("Hello", "Password");
         pagePOM.submitForm();
-        String actualText = pagePOM.verifyFormSubmit();
+        String actualText = pagePOM.verifyFormSubmitStatus();
         System.out.println("Text: " + actualText);
         String expectedText ="Submitted!";
         Assert.assertEquals(actualText, expectedText);
@@ -55,18 +62,28 @@ public class OpenLocalHtmlTest {
 
     @Test
     public void verifyCheckboxIsChecked() {
-        Assert.assertTrue(pagePOM.isCheckboxChecked(pagePOM.checkbox1));
+        Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.checkbox1));
     }
 
     @Test
     public void verifyCheckboxCanBeChecked() {
-        pagePOM.clickOnCheckbox(pagePOM.checkbox2);
-        Assert.assertTrue(pagePOM.isCheckboxChecked(pagePOM.checkbox2));
+        pagePOM.clickOnCheckboxRadioButton(pagePOM.checkbox2);
+        Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.checkbox2));
     }
 
-    @AfterTest
-    public void tearDown() {
-        System.out.println("*** Test suite - end");
-        driver.quit();
+    @Test
+    public void verifyRadioButtonCanBeSelected() {
+        pagePOM.clickOnCheckboxRadioButton(pagePOM.radioButton2);
+        Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.radioButton2));
     }
+
+    @Test
+    public void verifyDropdownListOptionCanBeSelected() {
+        String optionToSelect = "Two";
+        pagePOM.selectOptionFromDropDownList(pagePOM.dropDownList, optionToSelect);
+        String selectedOption = pagePOM.verifySelectedOptionInDropdownList(pagePOM.dropDownList);
+        Assert.assertEquals(selectedOption, optionToSelect);
+    }
+
+
 }
