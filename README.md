@@ -23,7 +23,6 @@ of the examples used in this project:
 - `@BeforeMethod` and `@AfterMethod` will be executed before and after each test
 
 
-
 # How to work with different UI elements
 UI automation testing rely on well-defined elements in applications. Selenium offers various [locators](https://www.selenium.dev/documentation/webdriver/elements/) for this purpose, 
 including `By.id()`, `By.name()`, `By.xpath()`, `By.cssSelector()`, etc. 
