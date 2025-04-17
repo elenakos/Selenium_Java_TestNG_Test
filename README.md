@@ -1,4 +1,6 @@
-This repo contains test cases for testing HTML pages, elements and navigations using [Selenium](https://www.selenium.dev/) with Java binding and [TestNG](https://testng.org/).
+[Selenium](https://www.selenium.dev/) is a powerful open-source framework for automating web browsers for testing web applications.
+
+This repo contains test cases for testing HTML pages, elements and navigations using Selenium with Java binding and [TestNG](https://testng.org/).
 
 This example is using a local HTML document with various elements and styled with CSS and JavaScript.
 
