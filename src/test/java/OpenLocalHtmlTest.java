@@ -9,6 +9,8 @@ public class OpenLocalHtmlTest {
 
     private WebDriver driver;
     private PagePOM pagePOM;
+
+    private Utilities utilities;
     String projectPath = System.getProperty("user.dir"); // Gets the current project directory
 
     @BeforeTest
@@ -16,6 +18,7 @@ public class OpenLocalHtmlTest {
         System.out.println("*** Test suite - start");
         driver = new ChromeDriver();
         pagePOM = new PagePOM(driver);
+        utilities = new Utilities(driver);
         driver.manage().window().maximize();
         String relativePath = "src/test/HTML/Page.html";
         File file = new File(projectPath, relativePath);
@@ -34,7 +37,7 @@ public class OpenLocalHtmlTest {
 
     @BeforeMethod
     public void startTest(Method method) {
-        System.out.println("**** Test case - start of: " + method.getName() + "()");
+        System.out.println("\n**** Test case - start of: " + method.getName() + "()");
     }
 
     @AfterMethod
@@ -61,7 +64,7 @@ public class OpenLocalHtmlTest {
     }
 
     @Test
-    public void verifyCheckboxIsChecked() {
+    public void verifyCheckboxIsCheckedByDefault() {
         Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.checkbox1));
     }
 
@@ -69,6 +72,11 @@ public class OpenLocalHtmlTest {
     public void verifyCheckboxCanBeChecked() {
         pagePOM.clickOnCheckboxRadioButton(pagePOM.checkbox2);
         Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.checkbox2));
+    }
+
+    @Test
+    public void verifyRadioButtonIsCheckedByDefault() {
+        Assert.assertTrue(pagePOM.isCheckboxRadiobuttonChecked(pagePOM.radioButton1));
     }
 
     @Test
@@ -89,9 +97,17 @@ public class OpenLocalHtmlTest {
     public void verifyDataListOptionCanBeSelected() throws InterruptedException {
         String optionToType = "San Francisco";
         String expectedOption = "San Francisco";
-        pagePOM.typeAndSelectOptionInDropdownList(pagePOM.datalistInput, optionToType);
+        pagePOM.typeAndSelectOptionInDataList(pagePOM.datalistInput, optionToType);
         String selectedOption = pagePOM.returnFieldValue(pagePOM.datalistInput);
         Assert.assertEquals(selectedOption, expectedOption);
     }
 
+    @Test
+    public void verifyDateCanBeEntered() {
+        pagePOM.fillDate(pagePOM.dateInput);
+        String actualValue = pagePOM.returnFieldValue(pagePOM.dateInput);
+        String expectedValue = utilities.returnTodayDate();
+        Assert.assertEquals(utilities.transformDateToMMDDYYYY(actualValue), expectedValue);
+
+    }
 }
