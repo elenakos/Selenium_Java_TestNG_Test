@@ -85,5 +85,13 @@ public class OpenLocalHtmlTest {
         Assert.assertEquals(selectedOption, optionToSelect);
     }
 
+    @Test
+    public void verifyDataListOptionCanBeSelected() throws InterruptedException {
+        String optionToType = "San Francisco";
+        String expectedOption = "San Francisco";
+        pagePOM.typeAndSelectOptionInDropdownList(pagePOM.datalistInput, optionToType);
+        String selectedOption = pagePOM.returnFieldValue(pagePOM.datalistInput);
+        Assert.assertEquals(selectedOption, expectedOption);
+    }
 
 }
